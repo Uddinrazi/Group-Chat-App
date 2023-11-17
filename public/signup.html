@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row justify-content-center my-5">
+        <di class="col-lg-6">
+        <form id="signup-form" onsubmit="submit(event)">  
+                
+                <label for="username" class="form-label">Username : </label> 
+                <input   type="text"   id="name" class="form-control" required>
+               
+                <label for="email" class="form-label">Email : </label>   
+                <input  type="text"  id="email" class="form-control" required>  
+
+                <label for="password" class="form-label">Password : </label>  
+                <input type="password"   id="pwd" class="form-control" required> 
+    
+                <label for="phone" class="form-label">Enter  phone number:</label>
+                <input type="tel"  id="phone"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" class="form-control" required><br>
+                
+                <button type="button" id="btn1" class="btn btn-primary">Sign Up</button>  
+                <a href="login.html"><button type="button" id="btn2" class="btn btn-primary">Login</button>  </a>
+           
+                
+             
+        </form> 
+    </di>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
