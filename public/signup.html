@@ -12,17 +12,19 @@
         <di class="col-lg-6">
         <form id="signup-form" onsubmit="submit(event)">  
                 
-                <label for="username" class="form-label">Username : </label> 
+                <label for="username" class="form-label">Enter Username : </label> 
                 <input   type="text"   id="name" class="form-control" required>
                
-                <label for="email" class="form-label">Email : </label>   
+                <label for="email" class="form-label">Enter Email : </label>   
                 <input  type="text"  id="email" class="form-control" required>  
 
-                <label for="password" class="form-label">Password : </label>  
+                <label for="phone" class="form-label">Enter  phone number:</label>
+                <input type="tel"  id="phone"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" class="form-control" required>
+
+                <label for="password" class="form-label">Enter Password : </label>  
                 <input type="password"   id="pwd" class="form-control" required> 
     
-                <label for="phone" class="form-label">Enter  phone number:</label>
-                <input type="tel"  id="phone"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" class="form-control" required><br>
+                <br>
                 
                 <button type="button" id="btn1" class="btn btn-primary">Sign Up</button>  
                 <a href="login.html"><button type="button" id="btn2" class="btn btn-primary">Login</button>  </a>
