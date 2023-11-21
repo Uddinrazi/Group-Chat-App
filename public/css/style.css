@@ -1,0 +1,28 @@
+#signup-form{
+   
+    width: 500px;
+    margin: auto;
+}
+
+#btn1{
+    width: 49%;
+}
+
+#btn2{
+    width: 50%;
+}
+
+#login-form{
+    
+    width: 500px;
+    margin: auto;  
+}
+
+#signup-btn{
+    width: 50%;  
+}
+#login-btn{
+    width: 49%;  
+}
+
+
