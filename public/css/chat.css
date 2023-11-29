@@ -321,7 +321,7 @@ img {
   position:relative;
   width: 100%;
   height: calc(100% - 120px);  /*60+60*/
-  padding: 50px;
+  padding: 20px;
   overflow-y: auto;
 }
 
@@ -430,6 +430,16 @@ img {
   border-radius:10px;
   border-color: #00a884 ;
   background-color: #00a884;;
+  color: white;
+  font-size: 1rem;
+ }
+
+ #grp-btn{
+  height: 8%;
+  width: 100%;
+  background-color:  #00a884;
+  border-color: #00a884 ;
+  border-radius:5px;
   color: white;
   font-size: 1rem;
  }

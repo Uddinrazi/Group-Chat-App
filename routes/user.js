@@ -8,4 +8,6 @@ router.post('/post-user-data', userC.postUserInfo)
 
 router.post('/post-login-data', userC.postLoginInfo)
 
+
+
 module.exports = router

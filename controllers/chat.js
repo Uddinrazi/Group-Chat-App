@@ -1,4 +1,5 @@
 const Chat = require('../models/chat') 
+const Group = require('../models/group')
 const User = require('../models/user')
  
 
@@ -6,10 +7,11 @@ module.exports.postChats = async(req, res, next) => {
     try{
       
         const {user_msg} = req.body
-        console.log(req.body,'hhhhhhhhhh')
-        let data = await Chat.create({text: user_msg, userId: req.user.id})
+        //console.log(req.body.createdAt,'aaaaaaatttttttt')
+       let data = await Chat.create({text: user_msg, userId: req.user.id,
+      include: Group })
         
-        res.status(201).json({data:data,success: true, message: ' msg saved'})
+       res.status(201).json({data:data,text: data.text,userId: data.userId ,success: true, message: ' msg saved'})
     }
   catch(err){
     console.log(err)
@@ -22,7 +24,7 @@ module.exports.getChats = async(req, res) => {
     const userId = req.user.id
   // let msgsLimit = + req.query.limit || 5;
     
-    let allData = await Chat.findAll({where: {userId: userId}})
+    let allData = await Chat.findAll()
     
     res.status(200).json({allData: allData, success: true, message: 'Got all data' })
     
