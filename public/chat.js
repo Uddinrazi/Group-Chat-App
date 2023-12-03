@@ -2,19 +2,20 @@ let sendbtn  = document.getElementById('send-btn');
 
 
 sendbtn.addEventListener('click', sendMsg)
-
+const token = localStorage.getItem('token')
+const headers = {headers: {'Authorization': token}}
 async function sendMsg(e) {
     try{
         e.preventDefault()
         const user_msg = document.getElementById('msg').value
-        
+       
         
         let obj = { user_msg}
         
         document.getElementById('chat-form').reset()
 
         const token = localStorage.getItem('token')
-        let response = await axios.post('http://localhost:3000/msg/post-chats',obj, {headers: {'Authorization' : token}})
+        let response = await axios.post('http://localhost:3000/msg/post-chats',obj,headers)
        console.log(response.data.userId)
         showChat(response.data)
         
@@ -30,12 +31,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     try{
         const token = localStorage.getItem('token')
         
+        
      //  setInterval( async (limit) => {
         
-        let response = await axios.get('http://localhost:3000/msg/get-chats?_limit=10',{headers: {'Authorization': token}})
+        let response = await axios.get('http://localhost:3000/msg/get-chats?_limit=10',headers)
         
         
-    console.log(response.data) 
+   // console.log(response.data) 
     
         for(let i=0; i<response.data.allData.length; i++){
            
@@ -51,6 +53,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             
            
         }
+        getGroupList()
        
    // },1000)fdf
        
@@ -77,4 +80,35 @@ else{
   div.innerHTML = `<p>${data.text}<br><span>07:43</span></p>`
   chats.append(div)
 }
+}
+
+
+async function getGroupList() {
+    try{
+        let response = await axios.get('http://localhost:3000/msg/get-group-list',headers)
+        console.log(response.data)
+      //  let group= response.data.user.groups
+        //for (let i = 0; i < group.length; i++){
+          //  console.log(group[i].id)
+        //}
+        
+       // console.log(result)
+       showGroupList(response.data)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+function showGroupList(data){
+    console.log(data)
+    for(let i=0; i<data.length;i++){
+        let name = data[i].name
+        console.log(data[i].name)
+    const parent = document.getElementsByClassName('chat-box')
+    const div = document.createElement('div')
+    div.innerHTML += `<ul> ${name} </ul>`
+    parent[0].append(div)
+    }
+    
 }

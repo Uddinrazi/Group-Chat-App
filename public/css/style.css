@@ -26,3 +26,16 @@
 }
 
 
+#admin{
+    
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#adminid{
+    float:right
+}
+
+.form-control{
+    width: 40%;
+}
