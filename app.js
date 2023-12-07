@@ -16,9 +16,9 @@ const grpRoutes = require('./routes/group')
 
 const User = require('./models/user')
 const Chat = require('./models/chat')
-const {Group, User_Admin,User_group} = require('./models/group')
+const { Group, User_Admin, User_group } = require('./models/group')
 
-app.use(express.static(path.join(__dirname,"/public")))
+app.use(express.static(path.join(__dirname, "/public")))
 
 app.use(cors());
 app.use(bodyParser.json())
@@ -32,8 +32,8 @@ app.use('/grp', grpRoutes)
 User.hasMany(Chat)
 Chat.belongsTo(User)
 
-User.belongsToMany(Group, { through: User_group})
-Group.belongsToMany(User, {through: User_group})
+User.belongsToMany(Group, { through: User_group })
+Group.belongsToMany(User, { through: User_group })
 User.hasMany(User_group)
 User_group.belongsTo(User)
 Group.hasMany(User_group)
@@ -42,8 +42,8 @@ User_group.belongsTo(Group)
 Group.hasMany(Chat)
 Chat.belongsTo(Group)
 
-User.belongsToMany(Group, { through: User_Admin})
-Group.belongsToMany(User, {as:'admins',through: User_Admin})
+User.belongsToMany(Group, { as: 'admins', through: User_Admin, timestamps:false})
+Group.belongsToMany(User, { as: 'admins', through: User_Admin, timestamps: false })
 
 sequelize
   .sync({ force: false })

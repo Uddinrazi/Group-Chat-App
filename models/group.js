@@ -17,12 +17,12 @@ const User_group = sequelize.define('user_group', {
 
 
 const User_Admin = sequelize.define('user_admin', {
-
+   
 })
 
 
 
 
 
-module.exports = {Group, User_Admin,User_group};
+module.exports = { Group, User_group, User_Admin };
 

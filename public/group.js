@@ -6,7 +6,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 try{
   
 let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
-  
+  let usrId = response.data.userId
+  console.log(usrId)
   for(let i=0; i<response.data.user.length; i++){
     let name  = response.data.user[i].name
     let id = response.data.user[i].id;
@@ -14,13 +15,33 @@ let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
     let user = document.getElementById('select') 
     user.innerHTML += `<ul><input type="checkbox" name="checkbox1" id="userid" value="${id}">${name}<input type="checkbox" name="checkbox2" id="adminid" value="${id}"></ul>`
 
+    
   }
+  
+ let checkbox2 = document.getElementsByName('checkbox2')
+   checkbox2.forEach((box) => {
+    let userId = localStorage.getItem('userId')
+    admin1 = box.value
+    if (admin1 == userId)
+      box.checked = true
+  })
+ 
+  let checkbox1 = document.getElementsByName('checkbox1')
+  checkbox1.forEach((box) => {
+    let userId = localStorage.getItem('userId')
+    usrId = box.value
+    if (usrId == userId)
+      box.checked = true
+  })
+   
 }
    catch(err){
     console.log(err)
    }
   
 })
+
+
 
 
 
@@ -45,6 +66,10 @@ async function createGroup(e){
     if(checkbox2[i].checked){
       adminId.push(checkbox2[i].value)
     }
+    
+    //console.log(userId)
+    console.log(checkbox2[i].value)
+    
   }
   let obj ={
     name,userId,adminId

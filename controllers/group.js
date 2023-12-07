@@ -8,7 +8,7 @@ module.exports.getUserList = async(req, res) => {
         
         const users = await User.findAll() 
         
-        res.status(200).json({user: users, message: 'list of users found'})
+        res.status(200).json({user: users,userId :req.user.id, message: 'list of users found'})
     }
     catch(err){
         console.log(err)
@@ -18,17 +18,17 @@ module.exports.getUserList = async(req, res) => {
 
   module.exports.postGroupInfo = async(req,res,) => {
     try{
-      const { id,name, userId, adminId } = req.body
+      const { name, userId, adminId } = req.body
      
-        console.log(id)
-        let response = await Group.create({id:id,name:name})
+        //console.log(id,'hghjgjhhhhhhhhhhhhh')
+        let response = await Group.create({name:name})
        
         const result = await response.addUsers(userId)
       const result1 = await response.addAdmins(adminId)
       
        
-      console.log(result1,'resssssssss' )
-      res.status(201).json({id:id,name:name,message:'grp details saved'})
+      
+      res.status(201).json({ id: id,name:name,message:'grp details saved'})
     }catch(err){
         console.log(err)
     }
