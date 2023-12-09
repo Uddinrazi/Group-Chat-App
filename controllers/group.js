@@ -1,17 +1,18 @@
 const Chat = require('../models/chat')
 const {User_Admin,User_group, Group}  = require('../models/group')
 const User = require('../models/user')
-
+const { Op } = require("sequelize");
 
 module.exports.getUserList = async(req, res) => {
     try{
-        
-        const users = await User.findAll() 
+        let userId = req.user.id
+      const users = await User.findAll() 
         
         res.status(200).json({user: users,userId :req.user.id, message: 'list of users found'})
     }
     catch(err){
-        console.log(err)
+      console.log(err)
+      res.status(400).json({err:err})
     }
 
   }

@@ -465,3 +465,11 @@ body {
       background-color: #97e994 ;
       border-color: #00a884;
     }
+
+    #admin{
+      width: 100%;
+      position: relative;
+      margin-left: 200%;
+      justify-content: flex-start;
+      align-items: left;
+    }

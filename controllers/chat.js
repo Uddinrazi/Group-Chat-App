@@ -81,12 +81,12 @@ module.exports.getGroupOnMainPage = async(req, res) => {
      // })
      // const result3 = await response.getChats()   
      
-    let response1 = await Group.findByPk({ where: { id: results } ,
+   // let response1 = await Group.findByPk({ where: { id: req.user.id } ,
   
-    }) 
-    const admins = response1.getAdmins()
+   // }) 
+    //const admins = response1.getAdmins()
     
-    res.status(200).json({ results, result1, admins, success: true, message: 'successfull found data' })
+    res.status(200).json({ results, result1,  success: true, message: 'successfull found data' })
   
   }
   

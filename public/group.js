@@ -11,7 +11,7 @@ let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
   for(let i=0; i<response.data.user.length; i++){
     let name  = response.data.user[i].name
     let id = response.data.user[i].id;
-    
+        
     let user = document.getElementById('select') 
     user.innerHTML += `<ul><input type="checkbox" name="checkbox1" id="userid" value="${id}">${name}<input type="checkbox" name="checkbox2" id="adminid" value="${id}"></ul>`
 
@@ -23,7 +23,7 @@ let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
     let userId = localStorage.getItem('userId')
     admin1 = box.value
     if (admin1 == userId)
-      box.checked = true
+      box.disabled = true
   })
  
   let checkbox1 = document.getElementsByName('checkbox1')
@@ -31,7 +31,7 @@ let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
     let userId = localStorage.getItem('userId')
     usrId = box.value
     if (usrId == userId)
-      box.checked = true
+      box.disabled = true
   })
    
 }
@@ -51,7 +51,7 @@ btn.addEventListener('click', createGroup)
 async function createGroup(e){
   try{
     e.preventDefault()
-  console.log('button clicked')
+  
   let name = document.getElementById('name').value
   let checkbox1 = document.getElementsByName('checkbox1')
   let userId = []

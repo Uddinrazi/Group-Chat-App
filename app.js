@@ -13,6 +13,7 @@ app.use(express.json())
 const signupRoutes = require("./routes/user");
 const chatRoutes = require('./routes/chat')
 const grpRoutes = require('./routes/group')
+const adminRoutes = require('./routes/admin')
 
 const User = require('./models/user')
 const Chat = require('./models/chat')
@@ -27,6 +28,7 @@ app.use(bodyParser.json())
 app.use("/user", signupRoutes);
 app.use("/msg", chatRoutes);
 app.use('/grp', grpRoutes)
+app.use('/admin', adminRoutes)
 
 
 User.hasMany(Chat)
@@ -42,7 +44,7 @@ User_group.belongsTo(Group)
 Group.hasMany(Chat)
 Chat.belongsTo(Group)
 
-User.belongsToMany(Group, { as: 'admins', through: User_Admin, timestamps:false})
+User.belongsToMany(Group, {through: User_Admin, timestamps:false})
 Group.belongsToMany(User, { as: 'admins', through: User_Admin, timestamps: false })
 
 sequelize
