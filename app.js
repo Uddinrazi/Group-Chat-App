@@ -2,11 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require('path')
+const multer = require('multer')
+const app = express();
 
 require("dotenv").config();
 const sequelize = require("./util/db");
+const io = require('socket.io')(app.listen(3000), {
+  cors: true
+})
 
-const app = express()
 
 app.use(express.json())
 
@@ -21,9 +25,23 @@ const { Group, User_Admin, User_group } = require('./models/group')
 
 app.use(express.static(path.join(__dirname, "/public")))
 
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(bodyParser.json())
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'files')
+  },
+  filename: (req, res, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+const upload = multer({ storage: storage });
+
+app.use('/upload',chatRoutes)
 
 app.use("/user", signupRoutes);
 app.use("/msg", chatRoutes);
@@ -50,8 +68,13 @@ Group.belongsToMany(User, { as: 'admins', through: User_Admin, timestamps: false
 sequelize
   .sync({ force: false })
   .then((result) => {
-    app.listen(3000);
+   
   })
   .catch((err) => {
     console.log(err);
   });
+
+
+io.on('connection', socket => {
+    
+  })

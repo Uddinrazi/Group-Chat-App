@@ -6,7 +6,8 @@ const Chat = sequelize.define('chat', {
     text: {
         type: Sequelize.STRING,
         allowNull: false
-    }
+    },
+    
 })
 
 module.exports = Chat;
