@@ -75,6 +75,3 @@ sequelize
   });
 
 
-io.on('connection', socket => {
-    
-  })

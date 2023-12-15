@@ -3,14 +3,14 @@ const headers = { headers: { 'Authorization': token } }
 const url = 'http://localhost:3000'
 
 let groupId = localStorage.getItem('groupId')
-
+console.log(groupId);
 
 window.addEventListener('DOMContentLoaded', async () => {
    try {
         let response = await axios.get('http://localhost:3000/msg/get-group-list', headers)
-      //  console.log(response.data)
+        console.log(response.data)
         
-        
+       document.getElementById('name').innerHTML =`Welcome ${response.data.user.name}`
         showGroupList(response.data.result1)
     }
     catch (err) {
@@ -24,13 +24,15 @@ let sendbtn = document.getElementById("send-btn");
 sendbtn.addEventListener("click", sendMsg);
 
 async function sendMsg(e) {
- 
+ //make another form byeee
   try {
     e.preventDefault();
     const grpmsg = document.getElementById("msg").value;
+  let groupId = localStorage.getItem("groupId");
+    console.log(groupId);
 
     let obj = { grpmsg, groupId };
-    console.log(obj)
+   
     let response = await axios.post(
       `http://localhost:3000/msg/post-group-chats`,
       obj,
@@ -39,11 +41,8 @@ async function sendMsg(e) {
     document.getElementById("chat-form").reset();
     
     let msg = response.data
-    console.log(response.data)
-    msg.map((ele) => {
-      showChat(ele.text);
-    })
-    //showChat(response.data);
+   console.log(response.data)
+    showChat('You',response.data.data.text, response.data.data.userId);
   } catch (err) {
     console.log(err);
   }
@@ -51,22 +50,24 @@ async function sendMsg(e) {
 
 
 
-function showChat(data) {
-     console.log(data)
+function showChat(name,data,userid) {
+     
     let chats = document.getElementById('chats')
-    let div = document.createElement('div')
+  let div = document.createElement('div')
+
     let userId = localStorage.getItem('userId')
-    //console.log(userId)
-    if (userId == data.userId) {
-        div.classList.add("message-box", "my-message");
-        div.innerHTML = `<p>${data}<br><span>07:43</span></p>`
-        chats.append(div)
+  //console.log(userId)
+  
+    if (userId == userid || name == 'You') {
+      div.classList.add("message-box", "my-message");
+      div.innerHTML = `<p>${data}<br></p>`;
+      chats.append(div);
+    } else {
+      div.classList.add("message-box", "friend-message");
+      div.innerHTML = `<p><span>${name} :</span>${data}<br></p>`;
+      chats.append(div);
     }
-    else {
-        div.classList.add("message-box", "friend-message");
-        div.innerHTML = `<p>${data}<br><span>07:43</span></p>`
-        chats.append(div)
-    }
+  
 }
 
 
@@ -77,30 +78,35 @@ function showGroupList(data) {
     for (let i = 0; i < data.length; i++) {
         let name = data[i].name
         let id = data[i].id
-        //console.log(id)
+      //console.log(id)
+      
         const parent = document.getElementsByClassName('chat-box')
         const div = document.createElement('div')
         div.class = 'container'
-        div.innerHTML += `<button type="button" class="gname"id="${id}">${name} <p id="admin">Admins</button>`
+        div.innerHTML += `<button type="button" class="gname"id="${id}">${name} </button>`
         parent[0].append(div)
 
 
     }
     document.querySelectorAll('.gname').forEach(ele => {
         ele.addEventListener('click', async (e) => {
-            try {
+          try {
+              document.getElementById("admin").disabled = false;
                 e.preventDefault()
-                localStorage.setItem('groupId', ele.id)
+            localStorage.setItem('groupId', ele.id)
+            console.log(ele.id)
                 let groupId = localStorage.getItem('groupId', ele.id)
-               
+               console.log(groupId)
+              let chats = document.getElementById("chats")
+              chats.innerHTML = ''
                 let response = await axios.get(`http://localhost:3000/msg/get-group-chats/${groupId}`, headers, token)
-                console.log(response.data);
-
+               
+              //console.log(response)
                 let msg = response.data.response;
                 if (response.data.groupId == groupId) {
                   msg.map((ele) => {
-                    console.log(ele);
-                    showChat(ele.text);
+                    console.log(ele.user.name)
+                    showChat(ele.user.name,ele.text, ele.userId);
                   });
                 } 
                 //showChat(response.data.response);
@@ -115,7 +121,12 @@ function showGroupList(data) {
 }
 
 
+const logout = document.querySelector(".logbtn");
 
+logout.addEventListener("click", () => {
+  localStorage.clear();
+  location = "http://localhost:3000/login.html";
+});
 
 
 

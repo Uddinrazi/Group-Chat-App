@@ -23,7 +23,7 @@ let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
     let userId = localStorage.getItem('userId')
     admin1 = box.value
     if (admin1 == userId)
-      box.disabled = true
+      box.checked = true
   })
  
   let checkbox1 = document.getElementsByName('checkbox1')
@@ -31,7 +31,7 @@ let response = await axios.get('http://localhost:3000/grp/get-userlist',header)
     let userId = localStorage.getItem('userId')
     usrId = box.value
     if (usrId == userId)
-      box.disabled = true
+      box.checked = true
   })
    
 }
@@ -77,7 +77,11 @@ async function createGroup(e){
   console.log(name,userId,adminId)
 
   let response = await axios.post('http://localhost:3000/grp/post-group-info',obj,header)
-  console.log(response.data)
+    console.log(response.data)
+    let grpname = response.data.name
+    alert(`${grpname} group successfully created`)
+    window.location = "chat.html"
+    
   }
   catch(err){
     console.log(err)

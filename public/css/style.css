@@ -39,3 +39,20 @@
 .form-control{
     width: 40%;
 }
+
+.close {
+  font-size: 30px;
+  font-weight: 600;
+  position: relative;
+  margin-left: 90%;
+  
+  color: red;
+}
+
+.p3 {
+    position: relative;
+    margin-left: 30%;
+    margin-bottom: 10;
+
+}
+

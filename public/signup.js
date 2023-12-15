@@ -23,7 +23,8 @@ async function submit(event){
     }
     else{
         alert('Successfully signed up')
-    }
+       }
+        location = 'login.html'
     }catch(err){
         console.log(err)
     }

@@ -356,10 +356,10 @@ body {
 }
 
 .message-box p span {
-  display: block;
+ display: static;
   margin-top: 5px;
-  font-size: 0.8em;
-  opacity: 0.5;
+  font-size: 1em;
+  margin-right: 7px;
 }
 
 .my-message {
@@ -424,6 +424,24 @@ body {
     outline:none;
  }
 
+ .logbtn{
+  height: 250%;
+ margin-left: 0;
+  width: 250%;
+  border-radius:5px;
+  border-color: #00a884 ;
+  background-color: #00a884;;
+  color: white;
+  font-size: 1rem;
+ }
+
+  .right-container .header .admin{
+      width: 100%;
+      position: relative;
+      margin-left: 300%;
+      justify-content: flex-start;
+      align-items: left;
+    }
 
  #send-btn{
   margin-right: 20px;
@@ -454,9 +472,9 @@ body {
 
     .gname{
       font-size: 1rem;
-      display: flex;
-      justify-content: left;
-      padding: 5%;
+      display: grid;
+     justify-content: center;
+      padding: 2%;
       height: 40%;
       width: 100%;
       margin-bottom: 5px;
@@ -466,12 +484,15 @@ body {
       border-color: #00a884;
     }
 
-    #admin{
-      width: 100%;
-      position: relative;
-      margin-left: 200%;
-      justify-content: flex-start;
-      align-items: left;
-    }
-
    
+
+
+  #name{
+    margin-top:10%;
+  }
+ 
+
+  #groups{
+    
+   text-align: center;
+  }

@@ -1,7 +1,7 @@
 const Chat = require('../models/chat')
 const {User_Admin,User_group, Group}  = require('../models/group')
 const User = require('../models/user')
-const { Op } = require("sequelize");
+//const { Op } = require("sequelize");
 
 module.exports.getUserList = async(req, res) => {
     try{
@@ -17,11 +17,25 @@ module.exports.getUserList = async(req, res) => {
 
   }
 
-  module.exports.postGroupInfo = async(req,res,) => {
+  module.exports.postGroupInfo = async(req, res) => {
     try{
       const { name, userId, adminId } = req.body
-     
-        //console.log(id,'hghjgjhhhhhhhhhhhhh')
+
+      if (userId.length < 1) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "More than 2 users are required to form a group chat ",
+        });
+      }
+
+      if (!name) {
+        return res.status(400).json({
+          success: false,
+          message: "Please Fill all the feilds",
+        });
+     }
+        
         let response = await Group.create({name:name})
        
         const result = await response.addUsers(userId)
@@ -29,7 +43,7 @@ module.exports.getUserList = async(req, res) => {
       
        
       
-      res.status(201).json({ id: id,name:name,message:'grp details saved'})
+      res.status(201).json({ name:name,message:'grp details saved'})
     }catch(err){
         console.log(err)
     }
